@@ -68,7 +68,7 @@ WHERE joindate = (SELECT MAX(joindate) FROM Members)
 Include in your output the name of the court, and the name of the member
 formatted as a single column. Ensure no duplicate data, and order by
 the member name. */
-SELECT sub.court, CONCAT( sub.firstname, ' ', sub.surname ) AS name
+SELECT sub.court, CONCAT(sub.firstname, ' ', sub.surname) AS name
 FROM (
 	SELECT Facilities.name AS court, Members.firstname AS firstname, Members.surname AS surname
 	FROM Bookings
@@ -85,7 +85,7 @@ different costs to members (the listed costs are per half-hour 'slot'), and
 the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
-SELECT Facilities.name AS facility, CONCAT( Members.firstname, ' ', Members.surname ) AS name,
+SELECT Facilities.name AS facility, CONCAT(Members.firstname, ' ', Members.surname) AS name,
 CASE WHEN Bookings.memid =0
 THEN Facilities.guestcost * Bookings.slots
 ELSE Facilities.membercost * Bookings.slots
@@ -102,7 +102,7 @@ ORDER BY cost DESC
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 SELECT * 
-FROM (SELECT Facilities.name AS facility, CONCAT( Members.firstname,  ' ', Members.surname ) AS name, 
+FROM (SELECT Facilities.name AS facility, CONCAT(Members.firstname,  ' ', Members.surname) AS name, 
 CASE WHEN Bookings.memid =0
 THEN Facilities.guestcost * Bookings.slots
 ELSE Facilities.membercost * Bookings.slots
@@ -119,7 +119,7 @@ ORDER BY sub.cost DESC
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
 SELECT * 
-FROM (SELECT sub.facility, SUM( sub.cost ) AS total_revenue
+FROM (SELECT sub.facility, SUM(sub.cost) AS total_revenue
 FROM (SELECT Facilities.name AS facility, 
 CASE WHEN Bookings.memid =0
 THEN Facilities.guestcost * Bookings.slots
